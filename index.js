@@ -17,6 +17,14 @@ port.open((err) => {
   }
   port.write(`\n`);
 });
+function tryParseJson(str) {
+  try {
+    JSON.parse(str);
+  } catch (e) {
+    return false;
+  }
+  return JSON.parse(str);
+}
 port.pipe(parser);
 parser.on("data", (data) => {
   const datos = tryParseJson(data);
